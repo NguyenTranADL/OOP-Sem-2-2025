@@ -1,5 +1,5 @@
 #include <iostream>
-#include "person.h"
+#include "Person.h"
 
 PersonList deepCopyPersonList(PersonList pl) {
     PersonList newList;

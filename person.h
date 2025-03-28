@@ -13,5 +13,5 @@ struct PersonList {
     int numPeople;
 };
 
-#endif // PERSON_H
+#endif
 

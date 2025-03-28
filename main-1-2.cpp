@@ -1,5 +1,5 @@
 #include <iostream>
-#include "person.h"
+#include "Person.h"
 
 extern PersonList createPersonList(int n);
 int main() {

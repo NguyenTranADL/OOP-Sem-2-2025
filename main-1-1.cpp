@@ -1,5 +1,5 @@
 #include <iostream>
-#include "person.h"
+#include "Person.h"
 using namespace std;
 extern Person* createPersonArray(int n);
 int main(){
