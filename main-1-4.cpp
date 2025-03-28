@@ -17,6 +17,6 @@ int main(){
         std::cout << "Shallow Person " << i << ": " << shallowList.people[i].name << ", " << shallowList.people[i].age << std::endl;
     }
     delete[] list.people;
-    delete[] shallowList.peoplepeople;
+    delete[] shallowList.people;
     return 0;
 }
