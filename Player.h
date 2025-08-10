@@ -4,9 +4,10 @@
 #include <string>
 
 class Player {
-    public:
+public:
     virtual Move* makeMove() = 0;
     virtual std::string getName() const = 0;
     virtual ~Player() = default;
 };
+
 #endif

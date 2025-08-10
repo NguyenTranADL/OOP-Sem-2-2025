@@ -1,8 +1,9 @@
-// #include "Scissors.h"
-// #include "Paper.h" 
-// #include "Monkey.h" 
+#include "Scissors.h"
+#include <string>
 
-// bool Scissors::beats(const Move& other) const {
-//     const std::string otherName = other.getName();
-//     return otherName == "Paper" || otherName == "Monkey";
-// }
+std::string Scissors::getName() const { return "Scissors";}
+
+bool Scissors::beats(const Move* other) const {
+    std::string otherName = other->getName();
+    return otherName == "Paper" || otherName == "Monkey" || otherName == "Zombie";
+}

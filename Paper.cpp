@@ -1,8 +1,9 @@
-// #include "Paper.h"
-// #include "Rock.h"  
-// #include "Robot.h" 
+#include "Paper.h"
+#include <string>
 
-// bool Paper::beats(const Move& other) const {
-//     const std::string otherName = other.getName();
-//     return otherName == "Rock" || otherName == "Robot";
-// }
+std::string Paper::getName() const { return "Paper";}
+
+bool Paper::beats(const Move* other) const {
+    std::string otherName = other->getName();
+    return otherName == "Rock" || otherName == "Robot" || otherName == "Ninja";
+}

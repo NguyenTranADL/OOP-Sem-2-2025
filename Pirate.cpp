@@ -1,8 +1,9 @@
 #include "Pirate.h"
-#include "Robot.h"
-#include "Monkey.h"
+#include <string>
 
-bool Pirate::beats(const Move& other) const {
-    const std::string otherName = other.getName();
-    return otherName == "Robot" || otherName == "Monkey";
+std::string Pirate::getName() const {return "Pirate";}
+
+bool Pirate::beats(const Move* other) const {
+    std::string otherName = other->getName();
+    return otherName == "Robot" || otherName == "Rock";
 }

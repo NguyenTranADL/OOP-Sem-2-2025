@@ -5,12 +5,10 @@
 #include <string>
 
 class Move {
-    public:
+public:
     virtual std::string getName() const = 0;
-    virtual bool beats(const Move& other) const = 0;
+    virtual bool beats(const Move* other) const = 0;
     virtual ~Move() = default;
-
-    static Move* createMove(const std::string& name);
-    static bool isValidMove(const std::string& name);
 };
+
 #endif

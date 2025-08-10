@@ -1,8 +1,9 @@
 #include "Robot.h"
-#include "Ninja.h"
-#include "Zombie.h"
+#include <string>
 
-bool Robot::beats(const Move& other) const {
-    const std::string otherName = other.getName();
-    return otherName == "Ninja" || otherName == "Zombie";
+std::string Robot::getName() const {return "Robot";}
+
+bool Robot::beats(const Move* other) const {
+    std::string otherName = other->getName();
+    return otherName == "Scissors" || otherName == "Zombie" || otherName == "Ninja";
 }

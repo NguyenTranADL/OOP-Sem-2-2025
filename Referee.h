@@ -4,7 +4,8 @@
 
 class Referee {
 public:
-    Referee() = default;
+    Referee();
     Player* refGame(Player* player1, Player* player2);
 };
+
 #endif

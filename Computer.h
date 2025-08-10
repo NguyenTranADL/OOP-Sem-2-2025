@@ -1,16 +1,15 @@
 #ifndef COMPUTER_H
 #define COMPUTER_H
 #include "Player.h"
-#include <vector>
+#include <string>
 
-class Computer: public Player {
-    private:
-        std::string name;
-        std::vector <std::string> potentialMoves;
-    public:
-        Computer();
-        Computer(const std::string& name);
-        Move* makeMove() override;
-        std::string getName() const override;
+class Computer : public Player {
+private:
+    std::string name;
+public:
+    Computer(const std::string& name);
+    Move* makeMove() override;
+    std::string getName() const override;
 };
+
 #endif
