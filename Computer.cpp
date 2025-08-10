@@ -2,6 +2,14 @@
 #include "Move.h"
 #include "Rock.h"
 
-Computer::Computer() { name = "Computer";}
-std::string Computer::getName() const { return name;}
-Move* Computer::makeMove() { return new Rock(); }
+Computer::Computer(const std::string& name) : Player() {
+    this->name = name;
+}
+
+std::string Computer::getName() const {
+    return name;
+}
+
+Move* Computer::makeMove() {
+    return new Rock();
+}

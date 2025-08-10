@@ -5,13 +5,16 @@
 
 int main() {
     Referee ref;
-    Human human("Player1");
+    Human human("Human");
     Computer computer("Computer");
 
-     if (Player* winner = ref.refGame(&human, &computer)) {
-        std::cout << "Winner is: " << winner->getName() << std::endl;
-    } else {
-        std::cout << "It's a draw." << std::endl;
+    for (int i = 0; i < 4; ++i) {
+        Player* winner = ref.refGame(&human, &computer);
+        if (!winner) {
+            std::cout << "Tie" << std::endl;
+        } else {
+            std::cout << winner->getName() << std::endl;
+        }
     }
 
     return 0;

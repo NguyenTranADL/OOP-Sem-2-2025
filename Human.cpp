@@ -20,8 +20,7 @@ std::string Human::getName() const {
 
 Move* Human::makeMove() {
     std::string input;
-    std::cout << "Enter Move: ";
-    std::getline(std::cin, input);
+    std::cin >> input;
 
     if (input == "Rock") return new Rock();
     if (input == "Paper") return new Paper();
@@ -32,5 +31,5 @@ Move* Human::makeMove() {
     if (input == "Ninja") return new Ninja();
     if (input == "Zombie") return new Zombie();
 
-    return nullptr; // Undefined behavior for invalid input
+    return nullptr; 
 }
