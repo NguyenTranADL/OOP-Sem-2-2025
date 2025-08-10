@@ -8,6 +8,7 @@ class Computer: public Player {
         std::string name;
         std::vector <std::string> potentialMoves;
     public:
+        Computer();
         Computer(const std::string& name);
         Move* makeMove() override;
         std::string getName() const override;

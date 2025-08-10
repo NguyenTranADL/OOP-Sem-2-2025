@@ -5,12 +5,10 @@
 #include "Referee.h"
 
 int main() {
-    Human *h = new Human("Alice");
-    Human *h2 = new Human("Bob");
-    Computer *c = new Computer("Computer");
-
+    Human *h = new Human("Player1");
+    Human *h2 = new Human("Player2");
+    Computer *c = new Computer("Computer1");
     Referee referee;
-
     Player *winner1 = referee.refGame(h, h2);
     if (winner1) {
         std::cout << "The winner is: " << winner1->getName() << "!" << std::endl;
@@ -24,8 +22,7 @@ int main() {
     } else {
         std::cout << "It's a draw." << std::endl;
     }
-
-    delete h;
+delete h;
     delete h2;
     delete c;
 
