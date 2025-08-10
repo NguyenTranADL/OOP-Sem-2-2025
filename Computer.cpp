@@ -1,4 +1,5 @@
 #include "Computer.h"
+#include "Move.h"
 #include <random>
 
 Computer::Computer(const std::string& name) : name(name) {

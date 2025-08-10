@@ -17,7 +17,6 @@ Player* refGame(Player* player1, Player* player2) {
         return player2;
     }
     else {
-        std::cout << "It's a draw." << std::endl;
         return nullptr;
     }
 }

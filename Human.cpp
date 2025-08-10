@@ -1,5 +1,6 @@
 #include "Human.h"
 #include <string>
+#include "Move.h"
 #include <iostream>
 
 Human::Human(const std::string& name) : name(name) {}
