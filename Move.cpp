@@ -7,9 +7,8 @@
 #include "Pirate.h"
 #include "Ninja.h"
 #include "Zombie.h"
-#include "Factor.h"
 
-Move* Factor::createMove(const std::string& name) {
+Move* Move::createMove(const std::string& name) {
     if (name == "Rock") return new Rock();
     if (name == "Paper") return new Paper();
     if (name == "Scissors") return new Scissors();
@@ -21,7 +20,7 @@ Move* Factor::createMove(const std::string& name) {
     return nullptr;
 }
 
-bool Factor::isValidMove(const std::string& name) {
+bool Move::isValidMove(const std::string& name) {
     return (name == "Rock" || name == "Paper" || name == "Scissors" ||
             name == "Robot" || name == "Monkey" || name == "Pirate" ||
             name == "Ninja" || name == "Zombie");
