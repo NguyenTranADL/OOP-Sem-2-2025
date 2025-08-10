@@ -11,6 +11,7 @@
 #include <iostream>
 #include <string>
 
+Human::Human() {name="Human";}
 Human::Human(const std::string& name) : name(name) {}
 
 std::string Human::getName() const {

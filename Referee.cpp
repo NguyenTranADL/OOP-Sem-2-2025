@@ -23,8 +23,14 @@ Player* Referee::refGame(Player* player1, Player* player2) {
         return player1;
     }
 
+    if (move2->beats(move1)) {
+        delete move1;
+        delete move2;
+        return player2;
+    }
+
     delete move1;
     delete move2;
-    return player2;
+    return nullptr;
 }
 }
