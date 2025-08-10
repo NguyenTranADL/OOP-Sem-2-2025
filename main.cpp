@@ -5,11 +5,11 @@
 #include "Computer.h"
 
 int main() {
-    Referee referee;
-    Human* humanPlayer = new Human("Player 1");
-    Computer* computerPlayer = new Computer("Computer");
-    Player* winner = referee.refGame(humanPlayer, computerPlayer);
-    
+    Referee ref;
+    Human *humanPlayer = new Human("Player One");
+    Computer *computerPlayer = new Computer("Comp");
+    Player* winner = ref.refGame(humanPlayer, computerPlayer);
+
     if (winner != nullptr) {
         std::cout << "The winner is: " << winner->getName() << std::endl;
     } else {
