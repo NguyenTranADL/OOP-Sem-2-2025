@@ -1,36 +1,27 @@
 #include "Referee.h"
 #include "Move.h"
+#include <iostream>
 
-Referee::Referee() {}
+Referee::Referee() {};
 Player* Referee::refGame(Player* player1, Player* player2) {
-    Move* move1 = player1->makeMove();
-    Move* move2 = player2->makeMove();
+    Move* move1 = player1 -> makeMove();
+    Move* move2 = player2 -> makeMove();
+    std::cout << player1->getName() << " plays " << move1->getName() << std::endl;
+    std::cout << player2->getName() << " plays " << move2->getName() << std::endl;
 
-    if (!move1 || !move2) {
-        delete move1;
-        delete move2;
-        return nullptr;
-
-    if (move1->getName() == move2->getName()) {
-        delete move1;
-        delete move2;
-        return nullptr;
-    }
-
-    if (move1->beats(move2)) {
+    if (move1 -> beats(move2)) {
         delete move1;
         delete move2;
         return player1;
     }
-
-    if (move2->beats(move1)) {
+    else if (move2 -> beats(move1)) {
         delete move1;
         delete move2;
         return player2;
     }
-
     delete move1;
     delete move2;
     return nullptr;
-}
-}
+    }
+
+
