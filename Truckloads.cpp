@@ -21,9 +21,9 @@
         }
  };
 
- int main () {
-        Truckloads truck;
-        std::cout << "Có 10 xác, mỗi xe chở được 4 xác, số xe cần là: " << truck.numTrucks(10,4) << std::endl;
-        std::cout << "Có 257 xác, mỗi xe chở được 7 xác, số xe cần là: " << truck.numTrucks(257,7) << std::endl;
+//  int main () {
+//         Truckloads truck;
+//         std::cout << "Có 10 xác, mỗi xe chở được 4 xác, số xe cần là: " << truck.numTrucks(10,4) << std::endl;
+//         std::cout << "Có 257 xác, mỗi xe chở được 7 xác, số xe cần là: " << truck.numTrucks(257,7) << std::endl;
 
- }
+//  }
