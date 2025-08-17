@@ -3,14 +3,12 @@
 #include <stdexcept>
 #include <algorithm>
 #include <vector>
+#include "Reverser.h"
 
-class Reverser {
-public:
-  int reverseDigit(int value) {
+  int Reverser::reverseDigit(int value) {
     if (value < 0) {
       return -1;
     }
-
     static int reversedNumber = 0;
     static bool isFirstCall = true;
 
@@ -32,7 +30,7 @@ public:
     }
   }
 
-  std::string reverseString(std::string characters) {
+  std::string Reverser::reverseString(std::string characters) {
     if (characters.empty()) {
       return "ERROR";
     }
@@ -43,7 +41,6 @@ public:
     
     return characters.back() + reverseString(characters.substr(0, characters.length() - 1));
   }
-};
 
 // int main() {
 //   Reverser r;
