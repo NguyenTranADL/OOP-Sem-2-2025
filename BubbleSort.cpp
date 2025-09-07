@@ -1,14 +1,19 @@
 #include "BubbleSort.h"
+#include <algorithm>
 
-std::vector<int> BubbleSort::sort(const std::vector<int>& list) {
-    std::vector<int> arr = list;
-    int n = arr.size();
+std::vector<int> BubbleSort::sort(std::vector<int> list) {
+    int n = list.size();
     for (int i = 0; i < n - 1; ++i) {
+        bool swapped = false;
         for (int j = 0; j < n - i - 1; ++j) {
-            if (arr[j] > arr[j + 1]) {
-                std::swap(arr[j], arr[j + 1]);
+            if (list[j] > list[j + 1]) {
+                std::swap(list[j], list[j + 1]);
+                swapped = true;
             }
         }
+        if (!swapped) {
+            break;
+        }
     }
-    return arr;
+    return list;
 }

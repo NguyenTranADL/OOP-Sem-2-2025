@@ -1,32 +1,46 @@
 #include "QuickSort.h"
 
-std::vector<int> QuickSort::sort(const std::vector<int>& list) {
-    std::vector<int> arr = list;
-    quickSort(arr, 0, arr.size() - 1);
-    return arr;
+void QuickSort::swap(int& a, int& b) {
+  int temp = a;
+  a = b;
+  b = temp;
 }
 
-void QuickSort::quickSort(std::vector<int>& arr, int left, int right) {
-    if (left < right) {
-        int pivotIndex = partition(arr, left, right);
-        quickSort(arr, left, pivotIndex - 1);
-        quickSort(arr, pivotIndex + 1, right);
-    }
+std::vector<int> QuickSort::sort(std::vector<int> list) {
+  if (list.size() < 2) {
+    return list;
+  }
+  quickSortRecursive(list, 0, list.size() - 1);
+  return list;
 }
 
-int QuickSort::partition(std::vector<int>& arr, int left, int right) {
-    int len = right - left + 1;
-    int pivotIdx = (len >= 3) ? left + 2 : left; 
-    int pivot = arr[pivotIdx];
-    std::swap(arr[pivotIdx], arr[right]);
+void QuickSort::quickSortRecursive(std::vector<int>& list, int low, int high) {
+  if (low < high) {
+    int partitionIndex = partition(list, low, high);
+    quickSortRecursive(list, low, partitionIndex - 1);
+    quickSortRecursive(list, partitionIndex + 1, high);
+  }
+}
 
-    int storeIdx = left;
-    for (int i = left; i < right; ++i) {
-        if (arr[i] < pivot) {
-            std::swap(arr[i], arr[storeIdx]);
-            ++storeIdx;
-        }
+int QuickSort::partition(std::vector<int>& list, int low, int high) {
+  int pivotIndex;
+  if (high - low + 1 >= 3) {
+    pivotIndex = low + 2;
+  } else {
+    pivotIndex = high;
+  }
+
+  int pivotValue = list[pivotIndex];
+  swap(list[pivotIndex], list[high]);
+  int i = low - 1;
+
+  for (int j = low; j < high; ++j) {
+    if (list[j] < pivotValue) {
+      i++;
+      swap(list[i], list[j]);
     }
-    std::swap(arr[storeIdx], arr[right]);
-    return storeIdx;
+  }
+
+  swap(list[i + 1], list[high]);
+  return i + 1;
 }

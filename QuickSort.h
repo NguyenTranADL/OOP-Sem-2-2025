@@ -2,8 +2,10 @@
 
 class QuickSort : public Sort {
     private:
-        void quickSort(std::vector<int>& arr, int left, int right);
-        int partition(std::vector<int>& arr, int left, int right);
+        void quickSortRecursive(std::vector<int>& list, int low, int high);
+        int partition(std::vector<int>& list, int low, int high);
+        void swap(int& a, int& b);
     public:
-        std::vector<int> sort(const std::vector<int>& list) override;
+        std::vector<int> sort(std::vector<int> list) override;
+
 };
