@@ -171,31 +171,39 @@ public:
     }
 
     // TO BE IMPLEMENTED
+
     /**
-     * @brief Chèn một phần tử mới vào Min-Heap.
-     * @details Thêm phần tử vào cuối vector, sau đó sử dụng heapifyUp để đưa nó lên vị trí đúng.
+     * @brief Chèn một phần tử mới vào Min-Heap
+     * @details Thêm phần tử vào cuối vector và sử dụng heapifyUp để đưa nó lên vị trí đúng
      */
     void insert(T element)
     {
-        // 1. Thêm phần tử vào vị trí cuối cùng
+        // Thêm phần tử vào vị trí cuối cùng
         this->tree.push_back(element);
-        heapIndex newElementIndex = this->tree.size() - 1;
+        heapIndex currentIndex = this->tree.size() - 1;
 
-        std::cout << "Inserted element: " << element << " at index " << newElementIndex << std::endl;
+        // Logic Sàng Lên (Sift Up) được viết trực tiếp bên trong hàm (Tuân thủ nghiêm ngặt)
+        heapIndex parentIndex = this->getParentPosition(currentIndex);
 
-        // 2. Sàng Lên (Sift Up) để khôi phục thuộc tính Min-Heap
-        this->heapifyUp(newElementIndex);
+        // Lặp khi chưa đạt đến gốc (index > 1) và phần tử hiện tại nhỏ hơn nút cha
+        while (currentIndex > 1 && this->tree.at(currentIndex) < this->tree.at(parentIndex))
+        {
+            // Hoán đổi vị trí
+            std::cout << "Swap positions " << currentIndex << "(" << this->tree.at(currentIndex) << ") and " << parentIndex << "(" << this->tree.at(parentIndex) << ")" << std::endl;
+            std::swap(this->tree.at(currentIndex), this->tree.at(parentIndex));
+
+            // Di chuyển lên: cập nhật chỉ mục hiện tại và cha
+            currentIndex = parentIndex;
+            parentIndex = this->getParentPosition(currentIndex);
+        }
     }
 
-    /**
-     * @brief Loại bỏ một phần tử cụ thể khỏi Min-Heap.
-     * @details Tìm kiếm phần tử (O(n)), thay thế nó bằng phần tử cuối cùng, 
-     * xóa phần tử cuối, sau đó gọi heapifyUp hoặc heapifyDown để khôi phục heap.
-     */
+    // TO BE IMPLEMENTED
+    // Remove an element from the heap
     void remove(T value)
     {
         heapIndex indexToRemove = 0;
-        // 1. Tìm vị trí của giá trị cần xóa (O(n))
+        // Tìm vị trí của giá trị cần xóa (O(n))
         for (heapIndex i = 1; i < this->tree.size(); ++i)
         {
             if (this->tree.at(i) == value)
@@ -207,56 +215,53 @@ public:
 
         if (indexToRemove == 0)
         {
-            std::cout << "Element " << value << " not found in the heap." << std::endl;
+            std::cout << "Element " << value << " not found in the heap" << std::endl;
             return;
         }
-
-        std::cout << "Removing element: " << value << " at index " << indexToRemove << std::endl;
-
-        // Nếu nó là phần tử cuối cùng, chỉ cần xóa nó đi
+        // Chỉ cần xóa nếu nó là phần tử cuối cùng
         if (indexToRemove == this->tree.size() - 1)
         {
             this->tree.pop_back();
             return;
         }
-
-        // 2. Thay thế phần tử bị xóa bằng phần tử cuối cùng
+        // Thay thế phần tử bị xóa bằng phần tử cuối và loại bỏ phần tử cuối
         T lastElement = this->tree.back();
         this->tree.at(indexToRemove) = lastElement;
-        this->tree.pop_back(); // Xóa phần tử cuối cùng
+        this->tree.pop_back(); 
 
-        // 3. Khôi phục thuộc tính heap từ vị trí indexToRemove
+        // Khôi phục thuộc tính heap: kiểm tra xem cần sàng lên hay sàng xuống
+        heapIndex currentIndex = indexToRemove;
+        heapIndex parentIndex = this->getParentPosition(currentIndex);
         
-        heapIndex parentIndex = this->getParentPosition(indexToRemove);
-        
-        // Nếu phần tử mới (lastElement) nhỏ hơn nút cha, nó cần Sàng Lên
-        if (indexToRemove > 1 && this->tree.at(indexToRemove) < this->tree.at(parentIndex))
+        // Kiểm tra sàng lên (Sift Up)
+        if (currentIndex > 1 && this->tree.at(currentIndex) < this->tree.at(parentIndex))
         {
-            std::cout << "Restoring heap property by heapifying up from index " << indexToRemove << std::endl;
-            this->heapifyUp(indexToRemove);
+            while (currentIndex > 1 && this->tree.at(currentIndex) < this->tree.at(parentIndex))
+            {
+                std::cout << "Swap positions " << currentIndex << "(" << this->tree.at(currentIndex) << ") and " << parentIndex << "(" << this->tree.at(parentIndex) << ")." << std::endl;
+                std::swap(this->tree.at(currentIndex), this->tree.at(parentIndex));
+
+                currentIndex = parentIndex;
+                parentIndex = this->getParentPosition(currentIndex);
+            }
         }
         else
         {
-            // Nếu không, nó cần Sàng Xuống (hoặc đã ở đúng vị trí)
-            std::cout << "Restoring heap property by heapifying down from index " << indexToRemove << std::endl;
+            // Gọi hàm sàng xuống đã có sẵn
             this->heapifyDown(indexToRemove);
         }
     }
 
-    /**
-     * @brief Lấy phần tử nhỏ nhất (gốc) của Min-Heap mà không xóa nó.
-     * @return T Giá trị của phần tử nhỏ nhất.
-     */
+    // TO BE IMPLEMENTED
+    // Get the minimum element (in this case, the maximum element of the max-heap)
     T getMin()
     {
         if (this->isHeapEmpty())
         {
-            // Trả về giá trị tối thiểu an toàn nếu heap rỗng
             return std::numeric_limits<T>::min();
         }
         // Phần tử nhỏ nhất luôn nằm ở index 1
         return this->tree.at(1);
     }
 };
-
-#endif /* Tree_hpp */
+#endif
