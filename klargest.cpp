@@ -2,40 +2,43 @@
 #include <queue>
 #include <functional> 
 #include <limits>     
+#include <cstddef>    
 
 /**
- * @brief Tìm phần tử lớn thứ k trong một vector số nguyên
- * * @details Hàm này sử dụng một Min-Heap (priority_queue với std::greater) có kích thước k
- * Heap này luôn chứa k phần tử lớn nhất đã được duyệt qua
- * Phần tử nhỏ nhất trong Heap này (tức là phần tử ở gốc) chính là phần tử lớn thứ k
- * * @param values Vector số nguyên chưa được sắp xếp
- * @param k Thứ hạng lớn nhất cần tìm (ví dụ: k=2 là lớn thứ hai)
- * @return int Phần tử lớn thứ k. Trả về INT_MIN nếu input k không hợp lệ
+ * @brief Tìm phần tử lớn thứ k (Kth Largest Element) trong một mảng
+ * @details Thuật toán sử dụng một Min-Heap (Heap Tối thiểu) để lưu trữ 
+ * K phần tử lớn nhất đã duyệt qua. Độ phức tạp là O(N log K)
+ * @param values Mảng số nguyên không sắp xếp
+ * @param k Thứ tự của phần tử lớn nhất (ví dụ: k=1 là lớn nhất)
+ * @return Giá trị của phần tử lớn thứ k, hoặc INT_MIN nếu k không hợp lệ
  */
+
 int kth_largest(std::vector<int> values, int k) {
-    // Xử lý trường hợp k không hợp lệ
-    if (k <= 0 || k > values.size()) {
+    const size_t K_SIZE = static_cast<size_t>(k);
+    
+    // Kiểm tra tính hợp lệ của k: k phải lớn hơn 0 và không vượt quá kích thước mảng
+    if (k <= 0 || K_SIZE > values.size()) {
+        // Trả về giá trị tối thiểu của int nếu đầu vào không hợp lệ
         return std::numeric_limits<int>::min(); 
     }
 
-    // Khai báo Min-Heap (priority_queue với std::greater)
-    // Cú pháp: priority_queue<Kiểu dữ liệu, Container cơ sở, Comparator>
+    // Khai báo Min-Heap (std::priority_queue với comparator std::greater)
+    // Min-Heap này sẽ chỉ giữ K phần tử lớn nhất
     std::priority_queue<int, std::vector<int>, std::greater<int>> min_heap;
 
+    // Duyệt qua từng giá trị trong mảng đầu vào
     for (int value : values) {
-        // Nếu heap chưa đầy (kích thước < k), thêm phần tử vào
-        if (min_heap.size() < k) {
-            min_heap.push(value);
-        } else {
-            // Nếu heap đã đầy, so sánh giá trị hiện tại với phần tử nhỏ nhất trong heap (top)
-            if (value > min_heap.top()) {
-                // Nếu giá trị hiện tại lớn hơn, loại bỏ phần tử nhỏ nhất và thêm giá trị mới vào
-                min_heap.pop();
-                min_heap.push(value);
-            }
+        
+        // Luôn đẩy phần tử hiện tại vào Heap
+        min_heap.push(value);
+        
+        // Nếu kích thước Heap vượt quá K, loại bỏ phần tử nhỏ nhất
+        // Phần tử nhỏ nhất trong Min-Heap luôn nằm ở gốc (min_heap.top())
+        if (min_heap.size() > K_SIZE) {
+            min_heap.pop();
         }
     }
-
-    // Sau khi duyệt hết, phần tử ở gốc của Min-Heap chính là phần tử lớn thứ k
+    // Sau khi duyệt hết mảng, Min-Heap chỉ còn K phần tử lớn nhất
+    // Phần tử nhỏ nhất trong nhóm này (tại gốc Heap) chính là phần tử lớn thứ k
     return min_heap.top();
 }
